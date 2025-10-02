@@ -1,0 +1,55 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title>My Favorite Song</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="layout">
+    <!-- Left: song card (keep your existing markup inside) -->
+    <ion-card class="song-card">
+      <!-- cover, title, artist, time, range, controls... (your current code) -->
+      <ion-img [src]="song.coverUrl" alt="Album cover"></ion-img>
+      <ion-card-header>
+        <ion-card-title>{{ song.title }}</ion-card-title>
+        <ion-card-subtitle>{{ song.artist }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="time-row">
+          <span>{{ formatTime(currentTime) }}</span>
+          <span>{{ formatTime(duration) }}</span>
+        </div>
+        <ion-range
+          [min]="0"
+          [max]="duration || 0"
+          [value]="currentTime"
+          [dualKnobs]="false"
+          (ionChange)="seekTo($event)">
+        </ion-range>
+        <div class="controls">
+          <ion-button fill="clear" size="large" (click)="skip(-10)">
+            <ion-icon slot="icon-only" name="play-back"></ion-icon>
+          </ion-button>
+          <ion-button shape="round" size="large" (click)="togglePlay()">
+            <ion-icon slot="start" [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+            {{ isPlaying ? 'Pause' : 'Play' }}
+          </ion-button>
+          <ion-button fill="clear" size="large" (click)="skip(10)">
+            <ion-icon slot="icon-only" name="play-forward"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Right: lyrics card -->
+    <ion-card class="lyrics-card">
+      <ion-card-header>
+        <ion-card-title>Lyrics</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- innerText preserves line breaks; CSS below sets pre-wrap and scroll -->
+        <div class="lyrics" [innerText]="lyrics"></div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,89 @@
+/* Center the two columns; stack on small screens */
+.layout {
+  display: grid;
+  gap: 24px;
+  justify-content: center;      /* center horizontally */
+  align-content: center;        /* center vertically in the viewport */
+  min-height: calc(100vh - 56px); /* rough space minus header; adjust if needed */
+  padding: 16px;
+  grid-template-columns: 1fr;   /* mobile: stack */
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: auto 420px; /* song card + lyrics width */
+    align-items: start;                 /* align tops */
+  }
+}
+
+.song-card {
+  width: 100%;
+  max-width: 480px;
+
+  ion-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.lyrics-card {
+  width: 100%;
+  max-width: 420px;
+  min-height: 520px; /* visual balance with the cover */
+}
+
+.lyrics {
+  white-space: pre-wrap;  /* keep line breaks */
+  line-height: 1.5;
+  max-height: 460px;      /* make the text scroll inside the card */
+  overflow: auto;
+  font-size: 0.95rem;
+  color: black;
+  scrollbar-color: #000 #cfcfcf;
+}
+
+/* Chrome/Edge/Safari */;
+.lyrics::-webkit-scrollbar {
+  width: 18px;                     /* thickness like your mock */
+}
+
+.lyrics::-webkit-scrollbar-track {
+  background: #cfcfcf;             /* light gray track */
+  border-radius: 9999px;           /* fully rounded track */
+}
+
+.lyrics::-webkit-scrollbar-thumb {
+  background: #000;                /* black thumb */
+  border-radius: 9999px;           /* fully rounded pill */
+  border: 4px solid #cfcfcf;       /* creates the "gap" around thumb */
+}
+
+/* Optional: hover/active states (desktop nicety) */
+.lyrics::-webkit-scrollbar-thumb:hover {
+  background: #111;
+}
+.lyrics::-webkit-scrollbar-thumb:active {
+  background: #222;
+}
+
+/* keep your existing .time-row and .controls styles */
+.time-row {
+  display: flex;
+  justify-content: space-between;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+
+  ion-button[shape="round"] {
+    --border-radius: 9999px;
+  }
+}
